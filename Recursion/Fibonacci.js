@@ -19,4 +19,4 @@ function fibsRec(n){
     return result.concat([sum]) 
   }
 }
-console.log(fibsRec(8));
+console.log(`This was done recursively: ${fibsRec(8)}`);
