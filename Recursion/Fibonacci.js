@@ -11,7 +11,7 @@ console.log(fibs(8));
 
 // recursive solution
 function fibsRec(n){
-  if(n == 2){
+  if(n <= 1){
     return [0,1];
   }else{
     let result = fibsRec(n-1);
@@ -19,4 +19,5 @@ function fibsRec(n){
     return result.concat([sum]) 
   }
 }
-console.log(`This was done recursively: ${fibsRec(8)}`);
+let num = 8;
+console.log(`This was done recursively: ${fibsRec(num-1)}`);
