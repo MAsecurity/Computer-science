@@ -1,7 +1,7 @@
 // iterative solution
 function fibs(n){
  let array = [0,1];
- for(let i=0; i<n-2; i++){
+ for(let i=0; i<n-1; i++){
   let sum = array[array.length - 2] + array[array.length - 1];
   array.push(sum);
  }
@@ -16,8 +16,8 @@ function fibsRec(n){
   }else{
     let result = fibsRec(n-1);
     let sum = result[result.length - 2] + result[result.length - 1];
-    return result.concat([sum]) 
+    return result.concat([sum])
   }
 }
 let num = 8;
-console.log(`This was done recursively: ${fibsRec(num-1)}`);
+console.log(`This was done recursively: ${fibsRec(num)}`);
