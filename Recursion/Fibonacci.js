@@ -7,7 +7,7 @@ function fibs(n){
  }
  return array;
 }
-console.log(fibs(8));
+console.log(fibs(8)); // 0,1,1,2,3,5,8,13,21
 
 // recursive solution
 function fibsRec(n){
@@ -20,4 +20,4 @@ function fibsRec(n){
   }
 }
 let num = 8;
-console.log(`This was done recursively: ${fibsRec(num)}`);
+console.log(`This was done recursively: ${fibsRec(num)}`); // 0,1,1,2,3,5,8,13,21
