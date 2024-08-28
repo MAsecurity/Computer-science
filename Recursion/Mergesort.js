@@ -36,4 +36,4 @@ function merge(leftArr, rightArr){
 }
 let array = [3, 2, 1, 13, 8, 5, 0, 1]
 console.log(`Unordered array: ${array}`)
-console.log(`This was solved recursively: ${mergeSort(array)}`)
+console.log(`This was solved recursively: ${mergeSort(array)}`) // 0,1,1,2,3,5,8,13
