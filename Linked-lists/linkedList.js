@@ -17,7 +17,9 @@ class linkedList{
     }
   }
   prepend(value){
-
+    let newNode = new node(value);
+    newNode.nextNode = this.head;
+    this.head = newNode; 
   }
   size(){
 
@@ -48,4 +50,5 @@ class linkedList{
 let list = new linkedList();
 list.append("dog");
 list.append("cat")
+list.prepend("dragon");
 console.log(list.toString());
