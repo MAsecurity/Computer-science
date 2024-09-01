@@ -32,10 +32,11 @@ class linkedList{
 
   }
   head(){
+    return this.head.value;
 
   }
   tail(){
-
+    
   }
   at(index){
 
