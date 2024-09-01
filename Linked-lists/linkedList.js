@@ -22,6 +22,13 @@ class linkedList{
     this.head = newNode; 
   }
   size(){
+    let i=0;
+    let tmp = this.head;
+    while(tmp != null){
+      i++;
+      tmp = tmp.nextNode;
+    }
+    return i;
 
   }
   head(){
@@ -51,4 +58,5 @@ let list = new linkedList();
 list.append("dog");
 list.append("cat")
 list.prepend("dragon");
+console.log(list.size())
 console.log(list.toString());
