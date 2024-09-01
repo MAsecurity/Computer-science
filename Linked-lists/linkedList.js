@@ -165,4 +165,4 @@ console.log(`Find index of parrot: ${list.find('parrot')}`); // Find index of pa
 list.insertAt('lion',3)
 console.log(`Insert lion at index 3: ${list.toString()}`); // Insert lion at index 3: (dragon) -> (dog) -> (cat) -> (lion) -> (parrot) -> (hamster) -> (snake) -> null
 list.removeAt(3)
-console.log(`Remove lion at index 3: ${list.toString()}`) // 
+console.log(`Remove lion at index 3: ${list.toString()}`) // Remove lion at index 3: (dragon) -> (dog) -> (cat) -> (parrot) -> (hamster) -> (snake) -> null
