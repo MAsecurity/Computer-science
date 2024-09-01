@@ -56,12 +56,75 @@ class linkedList{
 
   }
   pop(){
+    let tmp = this.head;
+    let prev = null;
+    while(tmp.nextNode){
+      prev = tmp;
+      tmp = tmp.nextNode;
+    }
+    prev.nextNode = null;
 
   }
   contains(value){
-
+    let tmp = this.head;
+    while(tmp){
+      if(tmp.value == value){
+        return true;
+      }
+      tmp = tmp.nextNode;
+    }
+    return false
   }
   find(value){
+    let tmp = this.head;
+    let curI = -1;
+    while(tmp){
+      curI++;
+      if(tmp.value == value){
+        return curI;
+      }
+      tmp = tmp.nextNode;
+    }
+    return null;
+  }
+  insertAt(value,index){
+    let newNode = new node(value);
+    // edge case, check if our index is zero
+    if(index == 0){
+      this.prepend(value);
+    }else{
+      let tmp = this.head;
+      let curI = -1;
+      let prev = null;
+      while(tmp){
+        curI++;
+        if(curI == index){
+          newNode.nextNode = tmp;
+          prev.nextNode = newNode;
+          break;
+        }
+        prev = tmp;
+        tmp = tmp.nextNode;
+      }
+    }
+  }
+  removeAt(index){
+    if(index == 0){
+      this.head = null;
+    }else{
+      let tmp = this.head;
+      let curI = -1;
+      let prev = null;
+      while(tmp){
+        curI++;
+        if(curI == index){
+          prev.nextNode = prev.nextNode.nextNode
+        }else{
+          prev = tmp;
+          tmp = tmp.nextNode;
+        }
+      }
+    }
 
   }
   toString(){
@@ -89,8 +152,17 @@ list.append("hamster");
 list.append("snake");
 list.append("turtle");
 list.prepend("dragon");
-console.log(list.size())
-console.log(list.headMethod())
-console.log(list.tail());
-console.log(list.at(2));
-console.log(list.toString());
+console.log(`Size of list: ${list.size()}`) // Size of list: 7
+console.log(`Start of list: ${list.headMethod()}`); // Start of list: dragon
+console.log(`Tail of list: ${list.tail()}`); // Tail of list: turtle
+console.log(`Element at index 2: ${list.at(2)}`); //  Element at index 2: cat
+console.log(list.toString()); // (dragon) -> (dog) -> (cat) -> (parrot) -> (hamster) -> (snake) -> (turtle) -> null
+list.pop();
+console.log(`Pop element: ${list.toString()}`); // Pop element: (dragon) -> (dog) -> (cat) -> (parrot) -> (hamster) -> (snake) -> null
+console.log(`Does list contain snake: ${list.contains('snake')}`) // Does list contain snake: true
+console.log(`Does list contain pizza: ${list.contains('pizza')}`) // Does list contain pizza: false
+console.log(`Find index of parrot: ${list.find('parrot')}`); // Find index of parrot: 3
+list.insertAt('lion',3)
+console.log(`Insert lion at index 3: ${list.toString()}`); // Insert lion at index 3: (dragon) -> (dog) -> (cat) -> (lion) -> (parrot) -> (hamster) -> (snake) -> null
+list.removeAt(3)
+console.log(`Remove lion at index 3: ${list.toString()}`) // 
