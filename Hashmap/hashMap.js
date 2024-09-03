@@ -134,19 +134,16 @@ class HashMap{
     let entries = this.storedBuckets();
     let percent = Math.round(this.arr.length *  this.loadFactor)
     if (entries >= percent){
-      this.grow()
+      this.rehash()
     }
 
   }
   grow(){
-    for(let i=0; i<5; i++){
-      this.arr.push(0)
-    }
-    this.rehash()
+    this.arr = Array(this.arr.length * 2).fill(0)
   }
   rehash(){
     let keysValues = this.entries()
-    this.clear();
+    this.grow();
     for(let i=0; i<keysValues.length; i++){
       this.set(keysValues[i][0],keysValues[i][1]);
     }
