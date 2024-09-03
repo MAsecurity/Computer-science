@@ -184,7 +184,6 @@ console.log(`Get value of key apple: ${myMap.get('apple')}`) // Get value of key
 console.log(`Get value of sanji: ${myMap.get('sanji')}`) // Get value of sanji: null
 console.log(`Do we have dragon: ${myMap.has('dragon')}`) // Do we have dragon: true
 console.log(`Remove lion: ${myMap.remove('lion')}`); // Remove lion: lion has been removed
-console.log(`Do we have dragon: ${myMap.has('dragon')}`)
 console.log(myMap.entries())
 console.log(myMap.length())
 console.log(myMap.keys())
