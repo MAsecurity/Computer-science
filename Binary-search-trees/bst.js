@@ -17,6 +17,22 @@ class Tree{
     root.right = this.createBst(arr,mid+1,end);
     return root;
   }
+  insert(value){
+    let tmp = this.root;
+    while(tmp.left || tmp.right){
+      if(tmp.data > value){
+        tmp = tmp.left;
+      }else{
+        tmp = tmp.right;
+      }
+    }
+    let newNode = new Node(value);
+    if(tmp.data > value ){
+      tmp.left = newNode;
+    }else{
+      tmp.right = newNode;
+    }
+  }
 }
 const prettyPrint = (node, prefix = "", isLeft = true) => {
   if (node === null) {
@@ -52,3 +68,5 @@ function generateArray(){
 let arr = generateArray();
 let tree = new Tree();
 console.log(tree.buildTree(arr))
+console.log(tree.insert(2));
+console.log(prettyPrint(tree.root))
