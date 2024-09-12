@@ -17,53 +17,23 @@ class Tree{
     root.right = this.createBst(arr,mid+1,end);
     return root;
   }
-  insert(value){
-    // check for duplicates first
-    let dupCheck = this.find(value);
-    if(dupCheck){
-      return 'Cannot insert duplicates';
-    }
-    let tmp = this.root;
-    while(tmp.left || tmp.right){
-      if(tmp.data > value){
-        if(!tmp.left){
-          break;
-        }else{
-          tmp = tmp.left;
-        }
-      }else{
-        if(!tmp.right){
-          break;
-        }else{
-          tmp = tmp.right;
-        }
-      }
-    }
-    let newNode = new Node(value);
-    if(tmp.data > value ){
-      tmp.left = newNode;
+  insert(root,value){
+   if(root == null){
+    return new Node(value);
+   }else if(root.key == value){
+    return root;
+   }if(root.data > value){
+      root.left = this.insert(root.left,value)
     }else{
-      tmp.right = newNode;
+      root.right = this.insert(root.right, value)
     }
+    return root;
   }
   deleteItem(value){
     
   }
   find(value){
-    let tmp = this.root;
-    while(tmp.left || tmp.right){
-      if(tmp.data == value){
-        return tmp;
-      }if(tmp.data > value){
-        tmp = tmp.left;
-      }else{
-        tmp = tmp.right;
-      }
-    }
-    if(tmp.data == value ){
-      return tmp;
-    }
-    return false;
+    
   }
 }
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -100,6 +70,5 @@ function generateArray(){
 let arr = generateArray();
 let tree = new Tree();
 console.log(tree.buildTree(arr))
-console.log(tree.insert(2));
+console.log(tree.insert(tree.root,2));
 console.log(prettyPrint(tree.root))
-console.log(tree.find(92))
