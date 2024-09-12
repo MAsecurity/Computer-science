@@ -26,9 +26,17 @@ class Tree{
     let tmp = this.root;
     while(tmp.left || tmp.right){
       if(tmp.data > value){
-        tmp = tmp.left;
+        if(!tmp.left){
+          break;
+        }else{
+          tmp = tmp.left;
+        }
       }else{
-        tmp = tmp.right;
+        if(!tmp.right){
+          break;
+        }else{
+          tmp = tmp.right;
+        }
       }
     }
     let newNode = new Node(value);
