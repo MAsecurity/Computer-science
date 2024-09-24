@@ -58,8 +58,17 @@ class Tree{
     return curr;
 
   }
-  find(value){
-    
+  find(root,value){
+    if(!root){
+      return null;
+    }else if(root.data == value){
+      return root;
+    }else if(root.data > value){
+      return this.find(root.left,value)
+    }else if(root.data < value){
+      return this.find(root.right,value)
+    }
+    return root;
   }
 }
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -100,3 +109,6 @@ console.log(tree.insert(tree.root,2));
 console.log(prettyPrint(tree.root))
 console.log(tree.deleteItem(tree.root,2))
 console.log(prettyPrint(tree.root))
+tree.insert(tree.root,63);
+console.log(prettyPrint(tree.root));
+console.log(tree.find(tree.root,63));
