@@ -20,7 +20,7 @@ class Tree{
   insert(root,value){
    if(root == null){
     return new Node(value);
-   }else if(root.key == value){
+   }else if(root.data == value){
     return root;
    }if(root.data > value){
       root.left = this.insert(root.left,value)
@@ -29,8 +29,34 @@ class Tree{
     }
     return root;
   }
-  deleteItem(value){
-    
+  deleteItem(root,value){
+    if(!root){
+      return null;
+    }else if(root.data > value){  
+      root.left = this.deleteItem(root.left,value)
+    }else if(root.data < value){
+      root.right = this.deleteItem(root.right,value)
+    }else{
+      if(!root.left){
+        return root.right;
+      }else if(!root.right){
+        return root.left;
+      }else{
+        let successor = getSuccessor(root);
+        root.data = successor.data;
+        root.right = this.deleteItem(root.right,successor.data)
+      }
+    }
+    return root;
+  }
+  
+  getSuccessor(root){
+    let curr = root.right;
+    while(curr && curr.left){
+      curr = curr.left;
+    }
+    return curr;
+
   }
   find(value){
     
@@ -71,4 +97,6 @@ let arr = generateArray();
 let tree = new Tree();
 console.log(tree.buildTree(arr))
 console.log(tree.insert(tree.root,2));
+console.log(prettyPrint(tree.root))
+console.log(tree.deleteItem(tree.root,2))
 console.log(prettyPrint(tree.root))
