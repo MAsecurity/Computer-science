@@ -71,6 +71,9 @@ class Tree{
     return root;
   }
   levelOrder(callback){
+    if(typeof(callback) != 'function'){
+      throw new Error('This callback isn\'t a function');
+    }
     console.log(this.root.data)
     let queue = [this.root];
     while(queue.length){
@@ -92,6 +95,69 @@ class Tree{
       console.log(arr[i].data)
     }
   }
+  preOrder(node,callback){
+    if(typeof(callback) != 'function'){
+      throw new Error('This callback isn\'t a function');
+    }
+    if(!node){
+      return;
+    }
+    this.logOrder(node.data);
+    this.preOrder(node.left,callback);
+    this.preOrder(node.right,callback)
+  }
+  inOrder(node,callback){
+    if(typeof(callback) != 'function'){
+      throw new Error('This callback isn\'t a function');
+    }
+    if(!node){
+      return;
+    }
+    this.inOrder(node.left,callback);
+    this.logOrder(node.data)
+    this.inOrder(node.right,callback)
+  }
+  postOrder(node,callback){
+    if(typeof(callback) != 'function'){
+      throw new Error('This callback isn\'t a function');
+    }
+    if(!node){
+      return;
+    }
+    this.postOrder(node.left,callback);
+    this.postOrder(node.right,callback);
+    this.logOrder(node.data);
+  }
+  logOrder(val){
+    console.log(val);
+  }
+  height(node){
+    if(!node){
+      return -1;
+    }
+    let left = this.height(node.left);
+    let right = this.height(node.right);
+    return Math.max(left,right)+1
+  }
+  depth(node,val){
+    let depthNode = this.find(tree.root,31);
+    if(depthNode){
+       return this.calculateDepth(tree.root,val)
+    }else{
+      return null;
+    }
+
+  }
+  calculateDepth(node,val){
+    if(node.data == val){
+      return 0;
+    }else if(node.data > val){
+      return this.calculateDepth(node.left,val)+1;
+    }else{
+      return this.calculateDepth(node.right,val)+1;
+    }
+  }
+  
 }
 const prettyPrint = (node, prefix = "", isLeft = true) => {
   if (node === null) {
@@ -107,7 +173,8 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 };
 function getArray(){
   // length 10
-  let arr = [27, 31, 44, 45, 54, 58, 76, 83, 89, 20]
+  let arr = [20, 27, 31, 44, 45, 54, 58, 76, 83, 89]
+  return arr;
 }
 let arr = getArray();
 let tree = new Tree();
@@ -120,4 +187,14 @@ tree.insert(tree.root,63);
 console.log(prettyPrint(tree.root));
 console.log(tree.find(tree.root,63));
 console.log(tree.levelOrder(tree.logBFS))
-console.log(generateArray())
+console.log('Preorder:')
+console.log(tree.preOrder(tree.root,tree.logOrder))
+console.log('Inorder:')
+console.log(tree.inOrder(tree.root,tree.logOrder));
+console.log('Postorder:')
+console.log(tree.postOrder(tree.root,tree.logOrder))
+console.log(prettyPrint(tree.root))
+console.log(`Height of root: ${tree.height(tree.root)}`)
+console.log(`Depth of given node 31: ${tree.depth(tree.root,31)}`)
+console.log(`Depth of given node 63: ${tree.depth(tree.root,63)}`)
+console.log(`Depth of given node 44: ${tree.depth(tree.root,44)}`)
