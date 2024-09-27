@@ -70,6 +70,28 @@ class Tree{
     }
     return root;
   }
+  levelOrder(callback){
+    console.log(this.root.data)
+    let queue = [this.root];
+    while(queue.length){
+      let nextQueue = [];
+      for(let i=0; i<queue.length; i++){
+        if(queue[i].left){
+          nextQueue.push(queue[i].left)
+        }
+        if(queue[i].right){
+          nextQueue.push(queue[i].right)
+        }
+      }
+      callback(nextQueue)
+      queue = nextQueue;
+    }
+  }
+  logBFS(arr){
+    for(let i=0; i<arr.length; i++){
+      console.log(arr[i].data)
+    }
+  }
 }
 const prettyPrint = (node, prefix = "", isLeft = true) => {
   if (node === null) {
@@ -112,3 +134,4 @@ console.log(prettyPrint(tree.root))
 tree.insert(tree.root,63);
 console.log(prettyPrint(tree.root));
 console.log(tree.find(tree.root,63));
+console.log(tree.levelOrder(tree.logBFS))
