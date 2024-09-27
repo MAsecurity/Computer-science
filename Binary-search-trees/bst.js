@@ -105,26 +105,11 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
     prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
   }
 };
-function generateArray(){
+function getArray(){
   // length 10
-  let arr = [];
-  for(let i=0; i<10; i++){
-    arr.push(parseInt(Math.random() * 100))
-  }
-  arr.sort((a,b) => {
-    if(a>b){
-      return 1
-    }else if(a<b){
-      return -1;
-    }else{
-      return 0;
-    }
-  });
-  let setArr = new Set(arr);
-  let sortedArr = Array.from(setArr);
-  return sortedArr;
+  let arr = [27, 31, 44, 45, 54, 58, 76, 83, 89, 20]
 }
-let arr = generateArray();
+let arr = getArray();
 let tree = new Tree();
 console.log(tree.buildTree(arr))
 console.log(tree.insert(tree.root,2));
@@ -135,3 +120,4 @@ tree.insert(tree.root,63);
 console.log(prettyPrint(tree.root));
 console.log(tree.find(tree.root,63));
 console.log(tree.levelOrder(tree.logBFS))
+console.log(generateArray())
