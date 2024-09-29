@@ -2,6 +2,7 @@ import { Node } from "./node.js";
 class Tree{
   constructor(){
     this.root = null;
+    this.newArr = [];
   }
   buildTree(arr){
     this.root = this.createBst(arr,0,arr.length - 1)
@@ -133,16 +134,16 @@ class Tree{
   }
   height(node){
     if(!node){
-      return -1;
+      return 0;
     }
     let left = this.height(node.left);
     let right = this.height(node.right);
     return Math.max(left,right)+1
   }
   depth(node,val){
-    let depthNode = this.find(tree.root,31);
+    let depthNode = this.find(tree.root,val);
     if(depthNode){
-       return this.calculateDepth(tree.root,val)
+       return this.calculateDepth(tree.root,val) + 1
     }else{
       return null;
     }
@@ -156,6 +157,30 @@ class Tree{
     }else{
       return this.calculateDepth(node.right,val)+1;
     }
+  }
+  isBalanced(node){
+    if(!node){
+      return true;
+    }
+    let leftHeight = this.height(node.left);
+    let rightHeight = this.height(node.right);
+    if(Math.abs(leftHeight-rightHeight) <= 1 && this.isBalanced(node.left) == true && this.isBalanced(node.right) == true ){
+      return true;
+    }
+    return false;
+  }
+  rebalance(node){
+    let updateArr = this.rebuild(node);
+    this.buildTree(this.newArr);
+    this.newArr = [];
+  }
+  rebuild(node){
+    if(!node){
+      return;
+    }
+    this.rebuild(node.left);
+    this.newArr.push(node.data);
+    this.rebuild(node.right);
   }
   
 }
@@ -198,3 +223,14 @@ console.log(`Height of root: ${tree.height(tree.root)}`)
 console.log(`Depth of given node 31: ${tree.depth(tree.root,31)}`)
 console.log(`Depth of given node 63: ${tree.depth(tree.root,63)}`)
 console.log(`Depth of given node 44: ${tree.depth(tree.root,44)}`)
+tree.deleteItem(tree.root,63);
+console.log(prettyPrint(tree.root))
+console.log(`Is this tree balanced: ${tree.isBalanced(tree.root)}`)// true
+// make tree unbalanced
+tree.insert(tree.root, 100);
+tree.insert(tree.root, 200);
+tree.insert(tree.root, 350);
+console.log(prettyPrint(tree.root));
+console.log(`Is this tree balanced: ${tree.isBalanced(tree.root)}`) // false;
+tree.rebalance(tree.root);
+console.log(`Is this tree balanced: ${tree.isBalanced(tree.root)}`) // true;
