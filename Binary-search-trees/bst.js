@@ -75,7 +75,7 @@ class Tree{
     if(typeof(callback) != 'function'){
       throw new Error('This callback isn\'t a function');
     }
-    console.log(this.root.data)
+    console.log([this.root.data])
     let queue = [this.root];
     while(queue.length){
       let nextQueue = [];
@@ -92,9 +92,11 @@ class Tree{
     }
   }
   logBFS(arr){
+    let newArr = [];
     for(let i=0; i<arr.length; i++){
-      console.log(arr[i].data)
+      newArr.push(arr[i].data)
     }
+    console.log(newArr);
   }
   preOrder(node,callback){
     if(typeof(callback) != 'function'){
@@ -103,7 +105,7 @@ class Tree{
     if(!node){
       return;
     }
-    this.logOrder(node.data);
+    callback(node.data);
     this.preOrder(node.left,callback);
     this.preOrder(node.right,callback)
   }
@@ -115,7 +117,7 @@ class Tree{
       return;
     }
     this.inOrder(node.left,callback);
-    this.logOrder(node.data)
+    callback(node.data)
     this.inOrder(node.right,callback)
   }
   postOrder(node,callback){
@@ -127,7 +129,7 @@ class Tree{
     }
     this.postOrder(node.left,callback);
     this.postOrder(node.right,callback);
-    this.logOrder(node.data);
+    callback(node.data);
   }
   logOrder(val){
     console.log(val);
