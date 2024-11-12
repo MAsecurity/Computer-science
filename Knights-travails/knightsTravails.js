@@ -1,6 +1,3 @@
-// build the adjacency list
-// find possible moves and ensure they are within the board and have not been visited
-// use bfs instead and use map for tracking parent node.
 class knightTravails {
   constructor(position,target){
     this.position = position;
