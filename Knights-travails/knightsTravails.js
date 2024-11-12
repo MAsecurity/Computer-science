@@ -11,7 +11,8 @@ class knightTravails {
   }
   knightMoves(){
     this.bfs(this.position)
-    console.log(this.path(this.position))
+    let fullPath = this.path(this.position);
+    console.log(fullPath)
   }
   isValid(arr){
     let filterArr = []
